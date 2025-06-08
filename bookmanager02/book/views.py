@@ -6,12 +6,32 @@ from book.models import Bookinfo
 def index(request):
 
     #在这里实现 增删改查
+    [book.id for book in Bookinfo.objects.all()]
+    [book.id for book in Bookinfo.objects.all()]
+    [book.id for book in Bookinfo.objects.all()]
+    [book.id for book in Bookinfo.objects.all()]
+    [book.id for book in Bookinfo.objects.all()]
+
+
+
     books = Bookinfo.objects.all()
+    [book.id for book in books]
+    [book.id for book in books]
+    [book.id for book in books]
+    [book.id for book in books]
+    [book.id for book in books]
+    [book.id for book in books]
+
     print(books)
 
 
     return HttpResponse("index")
 
+# name = 'abc'
+# mysql 的数据存储在 硬盘
+# redis 的数据存储在 内存
+
+# 把硬盘的数据存储在内存 也称之为 缓存
 
 ##############增加数据########################
 from book.models import Bookinfo
@@ -166,4 +186,54 @@ Bookinfo.objects.filter(Q(readcount__gt=20)|Q(id__lt=3))
 # 查询编号不等于3的书籍
 Bookinfo.objects.exclude(id__exact=3)
 Bookinfo.objects.filter(~Q(id__exact=3))
+
+########################聚合函数#####################################
+
+from django.db.models import Sum,Min,Max,Avg,Count
+
+# 模型类名.objects.aggregate(Xxx('字段名'))
+
+Bookinfo.objects.aggregate(Sum('readcount'))
+
+#######################排序######################################
+Bookinfo.objects.all().order_by('readcount') #升序
+Bookinfo.objects.all().order_by('-readcount') #降序
+
+
+########################级联操作##############################
+
+#查询书籍为1的所有人物信息
+
+#获取了id为1的书籍
+book=Bookinfo.objects.get(id=1)
+book.peopleinfo_set.all()
+
+# Peopleinfo.objects.filter(book=1)
+
+#查询人物为1书籍信息
+person=Peopleinfo.objects.get(id=1)
+
+person.book.name
+person.book.readcount
+
+################关联过滤查询########################
+
+# 语法形式
+# 查询1的数据，条件为 n
+# 模型类名.objects.(模型类名小写__字段名__运算符=值)
+
+# 查询图书，要求图书人物为"郭靖"
+Bookinfo.objects.filter(peopleinfo__name__exact='郭靖')
+Bookinfo.objects.filter(peopleinfo__name='郭靖')
+
+# 查询图书，要求图书中人物的描述包含"八"
+Bookinfo.objects.filter(peopleinfo__description__contains='八')
+
+# 查询书名为“天龙八部”的所有人物
+Peopleinfo.objects.filter(book__name__exact='天龙八部')
+Peopleinfo.objects.filter(book__name='天龙八部')
+
+# 查询图书阅读量大于30的所有人物
+Peopleinfo.objects.filter(book__readcount__gt=30)
+
 

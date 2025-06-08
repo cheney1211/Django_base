@@ -31,7 +31,12 @@ class Bookinfo(models.Model):
     readcount=models.IntegerField(default=0)
     commentcount=models.IntegerField(default=0)
     is_delete=models.BooleanField(default=False)
+    # 1对多的关系模型中
+    # 系统会为我们自动添加一个 关联模型类名小写_set
+    #
+    # peopleinfo_set=[Peopleinfo,Peopleinfo,...]  用于要数据
 
+    # peopleinfo  用于查询
     def __str__(self):
         return self.name
 
@@ -67,7 +72,7 @@ class Peopleinfo(models.Model):
     # 级联删除 CASCADE
 
     book=models.ForeignKey(Bookinfo,on_delete=models.CASCADE)
-
+    #book=Bookinfo()
     class Meta:
         db_table='peopleinfo'
 
