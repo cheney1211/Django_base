@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="https://unpkg.com/vue@2.6.14/dist/vue.js"></script>
+</head>
+<body>
+<div id="app">
+    {{message}}
+    <table border="2px">
+        <tr>
+            <td>用户名</td>
+            <td><input type="text" name="" v-model="username"></td>
+        </tr>
+        <tr>
+            <td>密码</td>
+            <td><input type="password" name="" v-model="password"></td>
+        </tr>
+        <tr>
+            <td>确认密码</td>
+            <td><input type="password" name="" v-model="verifypwd"></td>
+        </tr>
+        <tr>
+            <td>性别</td>
+            <td>
+                男<input type="radio" name="gender" value="male" v-model="gender">
+                女<input type="radio" name="gender" value="female" v-model="gender">
+            </td>
+        </tr>
+        <tr>
+            <td>爱好</td>
+            <td>
+                篮球<input type="checkbox" name="hobby" value="basketball" v-model="hobby">
+                足球<input type="checkbox" name="hobby" value="soccer" v-model="hobby">
+                乒乓球<input type="checkbox" name="hobby" value="pingpong" v-model="hobby">
+            </td>
+        </tr>
+        <tr>
+            <td>城市</td>
+            <td>
+                <select v-model="city">
+                <option value="1000">北京</option>
+                <option value="1001">上海</option>
+                <option value="1002">广州</option>
+                <option value="1003">深圳</option>
+                <option value="1004">重庆</option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td>个人简介</td>
+            <td>
+               <textarea v-model="desc"></textarea>
+            </td>
+        </tr>
+    </table>
+    <button v-on:click="register">注册</button>
+</div>
+</body>
+<script type="text/javascript">
+    var app=new Vue({
+        el:'#app',
+        data:{
+            message:'hello',
+            username:'',
+            password:'',
+            verifypwd:'',  //确认密码
+            gender:'',   //性别
+            city:'',    //城市
+            hobby:[],  //爱好  特别注意： like(多选) 用列表
+            desc:''    //描述
+        },
+        methods:{
+            register:function () {
+                //this 表示当前的vue实例
+                // 使用 vue中的 data变量的时候 使用this.变量名
+                alert(this.username+this.password+this.verifypwd+this.gender+this.city+this.hobby+this.desc)
+            }
+        }
+    })
+</script>
+</html>

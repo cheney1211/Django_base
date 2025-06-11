@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <!--
+        第一步：导入Vue.js 先导入vue,js 所以在head中导入
+        第二步： 定义一个标签，来接管标签中的内容
+        第三步 创建vue实例。让vue实例 获取HTML
+     -->
+    <script src="https://unpkg.com/vue@2.6.14/dist/vue.js"></script>
+</head>
+<body>
+<div id="app">
+<!--  这里是HTML的相关内容
+      {{}}语法形式：胡子语法 {{变量名}}}
+  -->
+    {{message}}
+    [[message]]
+    <hr>
+    <a v-bind:href="next">{{info}}</a>
+    <a v-bind:href="next">[[info]]</a>
+    <hr>
+<!--
+       v-if与v-else要紧挨着
+ -->
+    <a href="#" v-if="isLogin">个人中心</a>
+    <a href="#" v-else>请登录</a>
+    <hr>
+    <a href="#" v-if="level===1">皇帝</a>
+    <a href="#" v-else-if="level===2">皇亲</a>
+    <a href="#" v-else-if="level===3">国戚</a>
+    <a href="#" v-else-if="level===4">大臣</a>
+    <a href="#"v-else>平民</a>
+    <hr>
+    <span v-if="seen">if</span>
+    <span v-show="seen">show</span>
+    <hr>
+    <ul>
+    <!--  v-for="变量名 in 列表变量名" -->
+<!--        <li v-for="shop in shops">{{shop}}</li>-->
+    <!--  v-for="(列表元素,索引) in 变量名" -->
+<!--        <li v-for="(shop,index) in shops">第{{index+1}}家店：{{shop}}</li>-->
+
+<!--        <li v-for="value in object">{{value}}</li>-->
+<!--        v-for="(值,key) in 变量名"-->
+        <li v-for="(value,name) in object">{{name}}:{{value}}</li>
+
+        <hr>
+        <button v-on:click="counter+=1">Add 1</button>
+        <span>this is result {{counter}}</span>
+
+        <button v-on:click="login">注册</button>
+        <hr>
+        <button v-on:click="sayHi('ruha')">sayHi</button>
+    </ul>
+</div>
+</body>
+<script type="text/javascript">
+    /*
+     var app 定义一个变量
+     new Vue 实例化
+     el: '#app'相当于 js document,getElementById('app')
+        获取div标签
+     data:变量
+     */
+    var app=new Vue(
+        {
+            el:'#app',
+            // delimiters:['[[',']]'],  //delimiters 分隔符 [开始的分割符，结束的分隔符]
+            data:{
+                message:'Hello Vue!',
+                info:'点击有惊喜',
+                next:'http://www.itcast.cn',
+                isLogin:true,
+                level:2,
+                seen:false,
+                shops:['北京','广州','深圳','上海','重庆'],
+                object:{
+                    title:'How to do lists in View',
+                    author:'Jane Doe',
+                    publishedAt:'2016-04-10'
+                },
+                counter:1
+            },
+            methods:{
+                //函数
+                login:function(){
+                    alert('登录中~~~')
+                },
+                sayHi:function (message) {
+                    alert(message)
+                }
+            }
+        }
+    )
+</script>
+</html>
