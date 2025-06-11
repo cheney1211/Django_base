@@ -40,7 +40,7 @@ INSTALLED_APPS = [
     'book.apps.BookConfig',
     'person.apps.PersonConfig',
 ]
-
+# 中间件
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -49,6 +49,8 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    # 注册中间件
+    'book.middleware.TestMiddleware',
 ]
 
 ROOT_URLCONF = 'bookmanager04.urls'

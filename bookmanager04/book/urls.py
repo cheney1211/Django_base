@@ -1,7 +1,7 @@
 from django.urls import path
 from book.views import (create_book,shop,register,json,method,response
 ,set_cookie,get_cookie,set_session,get_session,login)
-from book.views import LoginView
+from book.views import LoginView,OrderView
 from django.urls import converters
 from django.urls.converters import register_converter
 # 1.定义转换器
@@ -37,7 +37,8 @@ urlpatterns = [
     path('login/',login),
 
     ###################################类视图
-    path('163login/',LoginView.as_view())
+    path('163login/',LoginView.as_view()),
+    path('order/',OrderView.as_view()),
 ]
 
 """

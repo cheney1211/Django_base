@@ -279,3 +279,36 @@ class LoginView(View):
 #         pass
 #
 # Person.say()
+
+
+###############################################################
+"""
+我的订单，个人中心页面
+如果登录用户 可以访问
+如果未登录用户 不应该访问，应该跳转到登录页面
+
+定义一个订单，个人中心 类视图
+
+
+如何定义我有没有登录呢？？？ 我们以登录 后台站点为例
+"""
+
+from django.contrib.auth.mixins import LoginRequiredMixin
+
+# LoginRequiredMixin 作用 只有用户才可以访问页面
+class OrderView(LoginRequiredMixin,View):
+    def get(self,request):
+
+        # 模拟一个标记位
+        # isLogin=False
+        # if not isLogin:
+        #     return HttpResponse('你没有登录，跳转到登录页面中~~~~~~~~~')
+        return HttpResponse('GET 我的订单页面，这个页面必须登录')
+
+    def post(self,request):
+        return HttpResponse('POST 我的订单页面，这个页面必须登录')
+
+"""
+多继承
+Python，C++
+"""
